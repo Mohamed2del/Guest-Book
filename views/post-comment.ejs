@@ -1,0 +1,38 @@
+<div class="card mb-3">
+    <h3 class="card-header">Post</h3>
+    <div class="card-body">
+      <h5 class="card-title"><%= post.user.name %></h5>
+      <h6 class="card-subtitle text-muted"><%= dateFormat(post.createdAt,'MMMM Do YYYY, h:mm:ss a') %></h6>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><%=post.post %></p>
+    </div>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><%= post.comments[0] %></li>
+      <li class="list-group-item"><%= post.comments[1] %></li>
+      <li class="list-group-item"><%= post.comments[2] %></li>
+    </ul>
+    
+  <form action="/posts/<%=post._id%>" method="POST">
+
+      
+    <div class="form-group">
+      <label for="exampleTextarea">Comment</label>
+      <div class="form-group">
+        <input
+        
+          id="comment"
+          name="comment"
+          class="form-control"
+          placeholder="Your Comment"
+        />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Comment</button>
+
+</form>
+    
+  </div>
+

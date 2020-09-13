@@ -1,0 +1,22 @@
+<form action="/posts/edit/<%=post._id%>" method="POST">
+  <%if (put) { %>
+    <input type="hidden" name="_method" value="put" />
+<% } %>
+    
+    <div class="form-group">
+      <label for="exampleTextarea">Your Post</label>
+      <div class="form-group">
+        <input
+        
+          id="post"
+          name="post"
+          class="form-control"
+          placeholder="your post"
+          value="<%= post.post%>"
+        />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Edit</button>
+
+</form>
