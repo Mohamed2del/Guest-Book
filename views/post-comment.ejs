@@ -8,6 +8,8 @@
     </div>
     <div class="card-body">
       <p class="card-text"><%=post.post %></p>
+      
+      <h6>Comments : </h6>
     </div>
 
     <ul class="list-group list-group-flush">
@@ -17,6 +19,13 @@
           <li class="list-group-item">
             <h5 class="card-title"><%= comment.user.name %> </h5> <p class="card-text"> <%= comment.comment %> </p> 
             <h6 class="card-subtitle text text-muted"><%= dateFormat(post.createdAt,'MMMM Do YYYY, h:mm:ss a') %></h6>
+            
+            <form action="/posts/<%= post._id %>" method="POST" >
+            
+              <input type="hidden" name="_method" value="delete" />
+                <a type="submit" class="card-link">Delete</a>
+    
+            </form>
       </li>
         
      
