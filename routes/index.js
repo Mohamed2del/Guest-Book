@@ -8,17 +8,25 @@ const Post = require('../models/Post')
 router.get('/', ensureGuest,(req, res) => res.render('welcome') )
 
 // Dashboard "user posts"
-router.get('/dashboard', ensureAuthenticated,(req, res) => 
+router.get('/dashboard', ensureAuthenticated,async(req, res) => {
+  const posts = await Post.find({user:req.user._id})
+              .populate('user')
+              .sort({createdAt :'desc'})
+              .lean()
+  res.render('dashboard',
+  {
+      name : req.user.name,
+      posts,
+      delete : true
+      
+      
+  } )
+})
     
-    res.render('dashboard',
-    {
-        name : req.user.name
-    } ))
-
+    
 // Home "all posts"
 router.get('/home', ensureAuthenticated, async(req, res) => {
     try {
-        console.log(res.locals.user._id);
         const posts = await Post.find()
               .populate('user')
               .sort({createdAt :'desc'})
@@ -26,6 +34,8 @@ router.get('/home', ensureAuthenticated, async(req, res) => {
         res.render('home',{
           
           posts,
+          name : req.user.name,
+          user : req.user
           
         })
       } catch (err) {

@@ -1,3 +1,5 @@
+<%- include('partials/nav'); %>
+
 <form action="/posts/edit/<%=post._id%>" method="POST">
   <%if (put) { %>
     <input type="hidden" name="_method" value="put" />

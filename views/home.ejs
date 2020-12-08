@@ -1,3 +1,5 @@
+<%- include('partials/nav'); %>
+
 <% posts.forEach(post => { %>
 
     <div class="card">
@@ -6,7 +8,19 @@
           <h6 class="card-subtitle mb-2 text-muted"><%= dateFormat(post.createdAt,'MMMM Do YYYY, h:mm:ss a') %></h6>
           <p class="card-text"> <%= post.post %></p>
           <a href="/posts/<%=post._id %>" class="card-link">Comment</a>
-          <a href="/posts/edit/<%=post._id %>" class="card-link">Edit</a>
+       
+          <%if((post.user._id) == (user.id)){ %>
+            
+            <a href="/posts/edit/<%=post._id %>" class="card-link">Edit</a>
+            
+            <form action="/posts/<%= post._id %>" method="POST" >
+            
+              <input type="hidden" name="_method" value="delete" />
+                <a type="submit" class="card-link">Delete</a>
+    
+            </form>
+
+         <%  } %>
           
         </div>
       </div>

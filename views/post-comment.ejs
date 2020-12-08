@@ -1,3 +1,5 @@
+<%- include('partials/nav'); %>
+
 <div class="card mb-3">
     <h3 class="card-header">Post</h3>
     <div class="card-body">
@@ -9,11 +11,18 @@
     </div>
 
     <ul class="list-group list-group-flush">
-      <li class="list-group-item"><%= post.comments[0] %></li>
-      <li class="list-group-item"><%= post.comments[1] %></li>
-      <li class="list-group-item"><%= post.comments[2] %></li>
+
+      <% comments.forEach(comment => { %>
+        
+          <li class="list-group-item">
+            <h5 class="card-title"><%= comment.user.name %> </h5> <p class="card-text"> <%= comment.comment %> </p> 
+            <h6 class="card-subtitle text text-muted"><%= dateFormat(post.createdAt,'MMMM Do YYYY, h:mm:ss a') %></h6>
+      </li>
+        
+     
     </ul>
-    
+    <% }) %>
+
   <form action="/posts/<%=post._id%>" method="POST">
 
       
